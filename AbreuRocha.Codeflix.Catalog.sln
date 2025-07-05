@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34009.444
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{3BC87E48-AF5C-4C73-A973-EA325C2809A1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{469635FB-DD8B-42BA-94E1-7ACE5CBA3C0A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AbreuRocha.Codeflix.Catalog.UnitTests", "AbreuRocha.Codeflix.Catalog.UnitTests\AbreuRocha.Codeflix.Catalog.UnitTests.csproj", "{93573469-2D76-4B2E-80DB-F116085E60FF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AbreuRocha.Codeflix.Catalog.Domain", "AbreuRocha.Codeflix.Catalog.Domain\AbreuRocha.Codeflix.Catalog.Domain.csproj", "{2383CFD0-B449-4C64-B5E1-92F4F42EA300}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AbreuRocha.Codeflix.Catalog.Application", "AbreuRocha.Codeflix.Catalog.Application\AbreuRocha.Codeflix.Catalog.Application.csproj", "{A260563A-B258-40A5-A26A-B12B1826A868}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{93573469-2D76-4B2E-80DB-F116085E60FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93573469-2D76-4B2E-80DB-F116085E60FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93573469-2D76-4B2E-80DB-F116085E60FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93573469-2D76-4B2E-80DB-F116085E60FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2383CFD0-B449-4C64-B5E1-92F4F42EA300}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2383CFD0-B449-4C64-B5E1-92F4F42EA300}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2383CFD0-B449-4C64-B5E1-92F4F42EA300}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2383CFD0-B449-4C64-B5E1-92F4F42EA300}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A260563A-B258-40A5-A26A-B12B1826A868}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A260563A-B258-40A5-A26A-B12B1826A868}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A260563A-B258-40A5-A26A-B12B1826A868}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A260563A-B258-40A5-A26A-B12B1826A868}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{93573469-2D76-4B2E-80DB-F116085E60FF} = {469635FB-DD8B-42BA-94E1-7ACE5CBA3C0A}
+		{2383CFD0-B449-4C64-B5E1-92F4F42EA300} = {3BC87E48-AF5C-4C73-A973-EA325C2809A1}
+		{A260563A-B258-40A5-A26A-B12B1826A868} = {3BC87E48-AF5C-4C73-A973-EA325C2809A1}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {556359A0-B863-45C8-8C46-C89229E693F4}
+	EndGlobalSection
+EndGlobal

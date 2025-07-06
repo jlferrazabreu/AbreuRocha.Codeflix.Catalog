@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using AbreuRocha.Codeflix.Catalog.UnitTests.Common;
+using Xunit;
 using DomainEntity = AbreuRocha.Codeflix.Catalog.Domain.Entity;
 
 namespace AbreuRocha.Codeflix.Catalog.UnitTests.Domain.Entity.Category;

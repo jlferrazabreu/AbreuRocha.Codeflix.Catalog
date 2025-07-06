@@ -1,6 +1,6 @@
 ﻿using DomainEntity = AbreuRocha.Codeflix.Catalog.Domain.Entity;
-namespace AbreuRocha.Codeflix.Catalog.Application.UseCases.Category.CreateCategory;
-public class CreateCategoryOutput
+namespace AbreuRocha.Codeflix.Catalog.Application.UseCases.Category.Common;
+public class CategoryModelOutput
 {
     public Guid Id { get; set; }
     public string Name { get; set; }
@@ -8,13 +8,14 @@ public class CreateCategoryOutput
     public bool IsActive { get; set; }
     public DateTime CreatedAt { get; set; }
 
-    public CreateCategoryOutput(
+    public CategoryModelOutput(
         Guid id,
-        string name, 
-        string description, 
+        string name,
+        string description,
         bool isActive,
         DateTime createAt
-    ){
+    )
+    {
         Id = id;
         Name = name;
         Description = description;
@@ -22,9 +23,9 @@ public class CreateCategoryOutput
         CreatedAt = createAt;
     }
 
-    public static CreateCategoryOutput FromCategory(
+    public static CategoryModelOutput FromCategory(
         DomainEntity.Category category)
-        => new CreateCategoryOutput(
+        => new (
             category.Id,
             category.Name,
             category.Description,

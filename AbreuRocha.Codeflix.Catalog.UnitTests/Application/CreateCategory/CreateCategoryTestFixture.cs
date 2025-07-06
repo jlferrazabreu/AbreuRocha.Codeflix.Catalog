@@ -1,7 +1,7 @@
 ﻿using AbreuRocha.Codeflix.Catalog.Application.Interfaces;
 using AbreuRocha.Codeflix.Catalog.Application.UseCases.Category.CreateCategory;
 using AbreuRocha.Codeflix.Catalog.Domain.Repository;
-using AbreuRocha.Codeflix.Catalog.UnitTests.Domain;
+using AbreuRocha.Codeflix.Catalog.UnitTests.Common;
 using Moq;
 using Xunit;
 

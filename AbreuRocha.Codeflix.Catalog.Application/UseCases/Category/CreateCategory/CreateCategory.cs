@@ -18,7 +18,7 @@ public class CreateCategory : ICreateCategory
 
     public async Task<CreateCategoryOutput> Handle(
         CreateCategoryInput input, 
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken)
     {
         var category = new DomainEntity.Category(
             input.Name,
@@ -27,12 +27,6 @@ public class CreateCategory : ICreateCategory
         );
         await _categoryRepository.Insert(category, cancellationToken);
         await _unitOfWork.Commit(cancellationToken);
-        return new CreateCategoryOutput(
-            category.Id,
-            category.Name,
-            category.Description,
-            category.IsActive,
-            category.CreatedAt
-         );
+        return CreateCategoryOutput.FromCategory(category);
     }
 }

@@ -5,6 +5,6 @@ public interface IGenericRepository<TAggregate> : IRepository
 {
     public Task Insert(
         TAggregate aggergate,
-        CancellationToken cancellationToken = default
+        CancellationToken cancellationToken
     );
 }

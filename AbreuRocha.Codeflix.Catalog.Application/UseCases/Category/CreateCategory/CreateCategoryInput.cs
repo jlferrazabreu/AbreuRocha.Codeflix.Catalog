@@ -1,5 +1,7 @@
-﻿namespace AbreuRocha.Codeflix.Catalog.Application.UseCases.Category.CreateCategory;
-public class CreateCategoryInput
+﻿using MediatR;
+
+namespace AbreuRocha.Codeflix.Catalog.Application.UseCases.Category.CreateCategory;
+public class CreateCategoryInput : IRequest<CreateCategoryOutput>
 {
     public CreateCategoryInput(
         string name, 

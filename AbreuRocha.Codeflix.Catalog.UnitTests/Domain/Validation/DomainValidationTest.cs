@@ -79,7 +79,7 @@ public class DomainValidationTest
 
         action.Should()
             .Throw<EntityValidationException>()
-            .WithMessage($"{fieldName} should be at leats {minLength} characters long");
+            .WithMessage($"{fieldName} should be at least {minLength} characters long");
     }
 
     [Theory(DisplayName = nameof(MinLengthOK))]

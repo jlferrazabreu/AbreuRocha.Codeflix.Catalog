@@ -1,8 +1,11 @@
-﻿namespace AbreuRocha.Codeflix.Catalog.Application.UseCases.Category.CreateCategory;
-public interface ICreateCategory
+﻿using MediatR;
+using System.Resources;
+
+namespace AbreuRocha.Codeflix.Catalog.Application.UseCases.Category.CreateCategory;
+public interface ICreateCategory : IRequestHandler<CreateCategoryInput, CreateCategoryOutput>
 {
     public Task<CreateCategoryOutput> Handle(
         CreateCategoryInput input,
-        CancellationToken cancellationToken = default
+        CancellationToken cancellationToken
     );
 }

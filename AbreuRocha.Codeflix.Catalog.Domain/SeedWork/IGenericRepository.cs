@@ -12,4 +12,9 @@ public interface IGenericRepository<TAggregate> : IRepository
         Guid Id,
         CancellationToken cancellationToken
     );
+
+    public Task Delete(
+        TAggregate aggergate,
+        CancellationToken cancellationToken
+    );
 }

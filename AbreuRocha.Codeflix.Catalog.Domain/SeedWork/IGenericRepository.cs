@@ -17,4 +17,9 @@ public interface IGenericRepository<TAggregate> : IRepository
         TAggregate aggergate,
         CancellationToken cancellationToken
     );
+
+    public Task Update(
+        TAggregate aggergate,
+        CancellationToken cancellationToken
+    );
 }

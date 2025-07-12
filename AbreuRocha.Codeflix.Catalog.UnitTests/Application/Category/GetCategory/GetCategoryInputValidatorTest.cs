@@ -2,7 +2,7 @@
 using FluentAssertions;
 using Xunit;
 
-namespace AbreuRocha.Codeflix.Catalog.UnitTests.Application.GetCategory;
+namespace AbreuRocha.Codeflix.Catalog.UnitTests.Application.Category.GetCategory;
 [Collection(nameof(GetCategoryTestFixture))]
 public class GetCategoryInputValidatorTest
 {

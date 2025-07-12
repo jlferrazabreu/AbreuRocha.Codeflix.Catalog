@@ -4,7 +4,7 @@ using Xunit;
 using AbreuRocha.Codeflix.Catalog.Application.Exceptions;
 using FluentAssertions;
 
-namespace AbreuRocha.Codeflix.Catalog.UnitTests.Application.DeteCategory;
+namespace AbreuRocha.Codeflix.Catalog.UnitTests.Application.Category.DeteCategory;
 
 [Collection(nameof(DeleteCategoryTestFixture))]
 public class DeleteCategoryTest
@@ -21,7 +21,7 @@ public class DeleteCategoryTest
     {
         var repositoryMock = _fixture.GetRepositoryMock();
         var unitOfWorkMock = _fixture.GetUnitOfWorkMock();
-        var CategoryExample = _fixture.GetValidCategory();
+        var CategoryExample = _fixture.GetExampleCategory();
         repositoryMock
             .Setup(x => x.Get(
                 CategoryExample.Id,

@@ -1,14 +1,14 @@
 ﻿using AbreuRocha.Codeflix.Catalog.Application.Exceptions;
 using AbreuRocha.Codeflix.Catalog.Application.UseCases.Category.Common;
 using AbreuRocha.Codeflix.Catalog.Application.UseCases.Category.UpdateCategory;
-using AbreuRocha.Codeflix.Catalog.Domain.Entity;
+using Entity = AbreuRocha.Codeflix.Catalog.Domain.Entity;
 using AbreuRocha.Codeflix.Catalog.Domain.Exceptions;
 using FluentAssertions;
 using Moq;
 using Xunit;
 using UseCase = AbreuRocha.Codeflix.Catalog.Application.UseCases.Category.UpdateCategory;
 
-namespace AbreuRocha.Codeflix.Catalog.UnitTests.Application.UpdateCategory;
+namespace AbreuRocha.Codeflix.Catalog.UnitTests.Application.Category.UpdateCategory;
 
 [Collection(nameof(UpdateCategoryTestFixture))]
 public class UpdateCategoryTest
@@ -18,15 +18,15 @@ public class UpdateCategoryTest
         => _fixture = fixture;
 
     [Theory(DisplayName = nameof(UpdateCategory))]
-    [Trait("Category", "UpdateCategory - UseCase")]
+    [Trait("Application", "UpdateCategory - UseCase")]
     [MemberData(
         nameof(UpdateCategoryTestDataGenerator.GetCategoriesToUpdate),
         parameters: 10,
         MemberType = typeof(UpdateCategoryTestDataGenerator)
     )]
     public async Task UpdateCategory(
-        Category exampleCategory, 
-        UseCase.UpdateCategoryInput input)
+        Entity.Category exampleCategory,
+        UpdateCategoryInput input)
     {
         var repositoryMock = _fixture.GetRepositoryMock();
         var unitOfWorkMock = _fixture.GetUnitOfWorkMock();
@@ -67,15 +67,15 @@ public class UpdateCategoryTest
     }
 
     [Theory(DisplayName = nameof(UpdateCategoryWithoutProvidingIsActive))]
-    [Trait("Category", "UpdateCategory - UseCase")]
+    [Trait("Application", "UpdateCategory - UseCase")]
     [MemberData(
         nameof(UpdateCategoryTestDataGenerator.GetCategoriesToUpdate),
         parameters: 10,
         MemberType = typeof(UpdateCategoryTestDataGenerator)
     )]
     public async Task UpdateCategoryWithoutProvidingIsActive(
-        Category exampleCategory,
-        UseCase.UpdateCategoryInput exampleInput)
+        Entity.Category exampleCategory,
+        UpdateCategoryInput exampleInput)
     {
         var input = new UpdateCategoryInput(
             exampleInput.Id,
@@ -121,15 +121,15 @@ public class UpdateCategoryTest
     }
 
     [Theory(DisplayName = nameof(UpdateCategoryOnlyName))]
-    [Trait("Category", "UpdateCategory - UseCase")]
+    [Trait("Application", "UpdateCategory - UseCase")]
     [MemberData(
         nameof(UpdateCategoryTestDataGenerator.GetCategoriesToUpdate),
         parameters: 10,
         MemberType = typeof(UpdateCategoryTestDataGenerator)
     )]
     public async Task UpdateCategoryOnlyName(
-        Category exampleCategory,
-        UseCase.UpdateCategoryInput exampleInput)
+        Entity.Category exampleCategory,
+        UpdateCategoryInput exampleInput)
     {
         var input = new UpdateCategoryInput(
             exampleInput.Id,
@@ -174,7 +174,7 @@ public class UpdateCategoryTest
     }
 
     [Fact(DisplayName = nameof(ThrowWhenCategoryNotFound))]
-    [Trait("Category", "UpdateCategory - UseCase")]
+    [Trait("Application", "UpdateCategory - UseCase")]
     public async Task ThrowWhenCategoryNotFound()
     {
         var repositoryMock = _fixture.GetRepositoryMock();
@@ -206,7 +206,7 @@ public class UpdateCategoryTest
     }
 
     [Theory(DisplayName = nameof(ThrowWhenCantUpdateCategory))]
-    [Trait("Category", "UpdateCategory - UseCase")]
+    [Trait("Application", "UpdateCategory - UseCase")]
     [MemberData(
         nameof(UpdateCategoryTestDataGenerator.GetInvalidInputs),
         parameters: 12,

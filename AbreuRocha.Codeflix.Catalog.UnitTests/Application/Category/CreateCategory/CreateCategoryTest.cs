@@ -1,14 +1,13 @@
 ﻿using AbreuRocha.Codeflix.Catalog.Application.UseCases.Category.CreateCategory;
-using AbreuRocha.Codeflix.Catalog.Domain.Entity;
+using Entity = AbreuRocha.Codeflix.Catalog.Domain.Entity;
 using AbreuRocha.Codeflix.Catalog.Domain.Exceptions;
-using AbreuRocha.Codeflix.Catalog.UnitTests.Domain.Entity.Category;
 using FluentAssertions;
 using Moq;
 using Xunit;
 using UsesCases = AbreuRocha.Codeflix.Catalog.Application.UseCases.Category.CreateCategory;
 
 
-namespace AbreuRocha.Codeflix.Catalog.UnitTests.Application.CreateCategory;
+namespace AbreuRocha.Codeflix.Catalog.UnitTests.Application.Category.CreateCategory;
 
 [Collection(nameof(CreateCategoryTestFixture))]
 public class CreateCategoryTest
@@ -35,7 +34,7 @@ public class CreateCategoryTest
 
         repositoryMock.Verify(
             repository => repository.Insert(
-                It.IsAny<Category>(),
+                It.IsAny<Entity.Category>(),
                 It.IsAny<CancellationToken>()
             ),
             Times.Once
@@ -51,7 +50,7 @@ public class CreateCategoryTest
         output.Description.Should().Be(input.Description);
         output.IsActive.Should().Be(input.IsActive);
         output.Id.Should().NotBeEmpty();
-        output.CreatedAt.Should().NotBeSameDateAs(default(DateTime));
+        output.CreatedAt.Should().NotBeSameDateAs(default);
     }
 
     [Fact(DisplayName = nameof(CreateCategoryWithOnlyName))]
@@ -73,7 +72,7 @@ public class CreateCategoryTest
 
         repositoryMock.Verify(
             repository => repository.Insert(
-                It.IsAny<Category>(),
+                It.IsAny<Entity.Category>(),
                 It.IsAny<CancellationToken>()
             ),
             Times.Once
@@ -89,7 +88,7 @@ public class CreateCategoryTest
         output.Description.Should().Be("");
         output.IsActive.Should().BeTrue();
         output.Id.Should().NotBeEmpty();
-        output.CreatedAt.Should().NotBeSameDateAs(default(DateTime));
+        output.CreatedAt.Should().NotBeSameDateAs(default);
     }
 
     [Fact(DisplayName = nameof(CreateCategoryWithOnlyNameAndDescription))]
@@ -112,7 +111,7 @@ public class CreateCategoryTest
 
         repositoryMock.Verify(
             repository => repository.Insert(
-                It.IsAny<Category>(),
+                It.IsAny<Entity.Category>(),
                 It.IsAny<CancellationToken>()
             ),
             Times.Once
@@ -128,7 +127,7 @@ public class CreateCategoryTest
         output.Description.Should().Be(input.Description);
         output.IsActive.Should().BeTrue();
         output.Id.Should().NotBeEmpty();
-        output.CreatedAt.Should().NotBeSameDateAs(default(DateTime));
+        output.CreatedAt.Should().NotBeSameDateAs(default);
     }
 
     [Theory(DisplayName = nameof(ThrowWenCantInstantiateCategory))]

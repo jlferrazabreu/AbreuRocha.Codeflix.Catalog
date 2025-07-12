@@ -1,6 +1,7 @@
 ﻿using AbreuRocha.Codeflix.Catalog.Application.UseCases.Category.ListCategories;
+using AbreuRocha.Codeflix.Catalog.UnitTests.Application.Category.ListCategories;
 
-namespace AbreuRocha.Codeflix.Catalog.UnitTests.Application.ListCategories;
+namespace AbreuRocha.Codeflix.Catalog.UnitTests.Application.Category.ListCategories;
 public class ListCategoriesTestDataGenerator
 {
     public static IEnumerable<object[]> GetInputsWithoutAllParameter(int times = 12)

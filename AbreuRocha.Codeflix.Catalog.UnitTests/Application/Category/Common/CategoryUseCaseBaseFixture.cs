@@ -1,20 +1,17 @@
-﻿using AbreuRocha.Codeflix.Catalog.Domain.Entity;
+﻿using AbreuRocha.Codeflix.Catalog.Application.Interfaces;
+using Entity = AbreuRocha.Codeflix.Catalog.Domain.Entity;
 using AbreuRocha.Codeflix.Catalog.Domain.Repository;
 using AbreuRocha.Codeflix.Catalog.UnitTests.Common;
 using Moq;
-using Xunit;
 
-namespace AbreuRocha.Codeflix.Catalog.UnitTests.Application.GetCategory;
-
-[CollectionDefinition(nameof(GetCategoryTestFixture))]
-public class GetCategoryTestFixtureCollection :
-    ICollectionFixture<GetCategoryTestFixture>
-{ }
-public class GetCategoryTestFixture : BaseFixture
+namespace AbreuRocha.Codeflix.Catalog.UnitTests.Application.Category.Common;
+public abstract class CategoryUseCaseBaseFixture
+    : BaseFixture
 {
     public Mock<ICategoryRepository> GetRepositoryMock()
         => new();
-
+    public Mock<IUnitOfWork> GetUnitOfWorkMock()
+        => new();
     public string GetValidCategoryName()
     {
         var categoryName = "";
@@ -35,11 +32,13 @@ public class GetCategoryTestFixture : BaseFixture
         return categoryDescription;
     }
 
-    public Category GetValidCategory()
-    {
-        return new(
+    public bool GetRandomBoolean()
+        => new Random().NextDouble() < 0.5;
+
+    public Entity.Category GetExampleCategory()
+        => new(
             GetValidCategoryName(),
-            GetValidCategoryDescription()
+            GetValidCategoryDescription(),
+            GetRandomBoolean()
         );
-    }
 }

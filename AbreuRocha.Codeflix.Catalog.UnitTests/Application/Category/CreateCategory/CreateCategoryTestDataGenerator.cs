@@ -1,31 +1,13 @@
-﻿using AbreuRocha.Codeflix.Catalog.Application.UseCases.Category.UpdateCategory;
-using AbreuRocha.Codeflix.Catalog.UnitTests.Application.CreateCategory;
+﻿using AbreuRocha.Codeflix.Catalog.UnitTests.Application.Category.CreateCategory;
 
-namespace AbreuRocha.Codeflix.Catalog.UnitTests.Application.UpdateCategory;
-public class UpdateCategoryTestDataGenerator
+namespace AbreuRocha.Codeflix.Catalog.UnitTests.Application.Category.CreateCategory;
+public class CreateCategoryTestDataGenerator
 {
-    public static IEnumerable<object[]> GetCategoriesToUpdate(int times = 10)
-    {
-        var fixture = new UpdateCategoryTestFixture();
-        for (int indice = 0; indice < times; indice++)
-        {
-            var exampleCategory = fixture.GetExampleCategory();
-            var exampleInput = fixture.GetValidInput(
-                exampleCategory.Id
-            );
-            yield return new object[]
-            {
-                exampleCategory,
-                exampleInput
-            };
-        }
-    }
-
     public static IEnumerable<object[]> GetInvalidInputs(int times = 12)
     {
-        var fixture = new UpdateCategoryTestFixture();
+        var fixture = new CreateCategoryTestFixture();
         var invalidInputslist = new List<object[]>();
-        var totalInvalidCases = 3;
+        var totalInvalidCases = 4;
 
         for (int index = 0; index < times; index++)
         {
@@ -44,6 +26,12 @@ public class UpdateCategoryTestDataGenerator
                     });
                     break;
                 case 2:
+                    invalidInputslist.Add(new object[] {
+                        fixture.GetInvalidInputDescriptionNull(),
+                        "Description should not be null"
+                    });
+                    break;
+                case 3:
                     invalidInputslist.Add(new object[] {
                         fixture.GetInvalidInputTooLongDescription(),
                         "Description should be less or equal 10000 characters long"

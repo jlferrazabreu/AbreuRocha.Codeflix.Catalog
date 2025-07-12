@@ -2,7 +2,7 @@
 using FluentAssertions;
 using AbreuRocha.Codeflix.Catalog.Application.UseCases.Category.UpdateCategory;
 
-namespace AbreuRocha.Codeflix.Catalog.UnitTests.Application.UpdateCategory;
+namespace AbreuRocha.Codeflix.Catalog.UnitTests.Application.Category.UpdateCategory;
 [Collection(nameof(UpdateCategoryTestFixture))]
 public class UpdateCategoryInputValidatorTest
 {

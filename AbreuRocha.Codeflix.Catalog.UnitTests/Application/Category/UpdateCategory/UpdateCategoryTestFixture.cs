@@ -1,50 +1,15 @@
-﻿using AbreuRocha.Codeflix.Catalog.Application.Interfaces;
-using AbreuRocha.Codeflix.Catalog.Application.UseCases.Category.CreateCategory;
-using AbreuRocha.Codeflix.Catalog.Application.UseCases.Category.UpdateCategory;
-using AbreuRocha.Codeflix.Catalog.Domain.Entity;
-using AbreuRocha.Codeflix.Catalog.Domain.Repository;
-using AbreuRocha.Codeflix.Catalog.UnitTests.Common;
-using Moq;
+﻿using AbreuRocha.Codeflix.Catalog.Application.UseCases.Category.UpdateCategory;
+using AbreuRocha.Codeflix.Catalog.UnitTests.Application.Category.Common;
 using Xunit;
 
-namespace AbreuRocha.Codeflix.Catalog.UnitTests.Application.UpdateCategory;
+namespace AbreuRocha.Codeflix.Catalog.UnitTests.Application.Category.UpdateCategory;
 
 [CollectionDefinition(nameof(UpdateCategoryTestFixture))]
 public class UpdateCategoryTestFixtureCollection 
     : ICollectionFixture<UpdateCategoryTestFixture>
 {}
-public class UpdateCategoryTestFixture : BaseFixture
+public class UpdateCategoryTestFixture : CategoryUseCaseBaseFixture
 {
-    public string GetValidCategoryName()
-    {
-        var categoryName = "";
-        while (categoryName.Length < 3)
-            categoryName = Faker.Commerce.Categories(1)[0];
-        if (categoryName.Length > 255)
-            categoryName = categoryName[..255];
-        return categoryName;
-    }
-
-    public string GetValidCategoryDescription()
-    {
-        var categoryDescription =
-            Faker.Commerce.ProductDescription();
-        if (categoryDescription.Length > 10_000)
-            categoryDescription =
-                categoryDescription[..10_000];
-        return categoryDescription;
-    }
-
-    public bool GetRandomBoolean()
-        => (new Random()).NextDouble() < 0.5;
-
-    public Category GetExampleCategory()
-        => new(
-            GetValidCategoryName(),
-            GetValidCategoryDescription(),
-            GetRandomBoolean()
-        );
-
     public UpdateCategoryInput GetValidInput(Guid? id = null)
         => new(
             id ?? Guid.NewGuid(),
@@ -82,9 +47,4 @@ public class UpdateCategoryTestFixture : BaseFixture
                 Faker.Commerce.ProductDescription();
         return invalidInputTooLongDescription;
     }
-
-    public Mock<ICategoryRepository> GetRepositoryMock()
-        => new();
-    public Mock<IUnitOfWork> GetUnitOfWorkMock()
-        => new();
 }

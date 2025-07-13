@@ -35,6 +35,9 @@ public class CategoryRepository
         return category!;
     }
 
+    public Task Update(Category aggergate, CancellationToken cancellationToken)
+        => Task.FromResult( _categories.Update(aggergate));
+
     public Task Delete(Category aggergate, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
@@ -47,8 +50,5 @@ public class CategoryRepository
         throw new NotImplementedException();
     }
 
-    public Task Update(Category aggergate, CancellationToken cancellationToken)
-    {
-        throw new NotImplementedException();
-    }
+    
 }

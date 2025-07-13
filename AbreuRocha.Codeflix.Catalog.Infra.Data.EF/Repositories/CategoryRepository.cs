@@ -1,4 +1,5 @@
-﻿using AbreuRocha.Codeflix.Catalog.Domain.Entity;
+﻿using AbreuRocha.Codeflix.Catalog.Application.Exceptions;
+using AbreuRocha.Codeflix.Catalog.Domain.Entity;
 using AbreuRocha.Codeflix.Catalog.Domain.Repository;
 using AbreuRocha.Codeflix.Catalog.Domain.SeedWork.SearchableRepository;
 using Microsoft.EntityFrameworkCore;
@@ -22,15 +23,24 @@ public class CategoryRepository
     {
         await _categories.AddAsync(aggergate, cancellationToken);
     }
+
+    public async Task<Category> Get(Guid Id, CancellationToken cancellationToken)
+    {
+        var category = await _categories.FindAsync(
+                new object[] { Id },
+                cancellationToken
+                );
+        NotFoundException
+            .ThrowIfNull(category, $"Category '{Id}' not found.");
+        return category!;
+    }
+
     public Task Delete(Category aggergate, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }
 
-    public Task<Category> Get(Guid Id, CancellationToken cancellationToken)
-    {
-        throw new NotImplementedException();
-    }
+    
 
     public Task<SearchOutput<Category>> Search(SearchInput input, CancellationToken cancellationToken)
     {

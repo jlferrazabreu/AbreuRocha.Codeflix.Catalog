@@ -43,10 +43,44 @@ public class CategoryRepository
 
 
 
-    public Task<SearchOutput<Category>> Search(SearchInput input, CancellationToken cancellationToken)
+    public async Task<SearchOutput<Category>> Search(
+        SearchInput input,
+        CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var toSkip = (input.Page - 1) * input.PerPage;
+        var query = _categories.AsNoTracking();
+        query = AddOrderToQuery(query, input.OrderBy, input.Order);
+        if (!string.IsNullOrWhiteSpace(input.Search))
+        {
+            query = query.Where(x => x.Name.Contains(input.Search));
+        }
+        var total = await query.CountAsync();
+        var items = await query
+            .AsNoTracking()
+            .Skip(toSkip)
+            .Take(input.PerPage)
+            .ToListAsync();
+
+        return new SearchOutput<Category>(
+            input.Page,
+            input.PerPage,
+            total,
+            items
+        );
     }
 
-    
+    private IQueryable<Category> AddOrderToQuery(
+        IQueryable<Category> query, 
+        string orderProperty, 
+        SearchOrder order)
+        => (orderProperty.ToLower(), order) switch
+        {
+            ("name", SearchOrder.Asc) => query.OrderBy(x => x.Name),
+            ("name", SearchOrder.Desc) => query.OrderByDescending(x => x.Name),
+            ("id", SearchOrder.Asc) => query.OrderBy(x => x.Id),
+            ("id", SearchOrder.Desc) => query.OrderByDescending(x => x.Id),
+            ("createdat", SearchOrder.Asc) => query.OrderBy(x => x.CreatedAt),
+            ("createdat", SearchOrder.Desc) => query.OrderByDescending(x => x.CreatedAt),
+            _ => query.OrderBy(x => x.Name)
+        };
 }

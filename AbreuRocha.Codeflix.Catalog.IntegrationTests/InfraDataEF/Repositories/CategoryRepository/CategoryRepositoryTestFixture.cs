@@ -1,8 +1,6 @@
 ﻿using AbreuRocha.Codeflix.Catalog.IntegrationTests.Base;
 using AbreuRocha.Codeflix.Catalog.Domain.Entity;
 using Xunit;
-using Microsoft.EntityFrameworkCore;
-using AbreuRocha.Codeflix.Catalog.Infra.Data.EF;
 using AbreuRocha.Codeflix.Catalog.Domain.SeedWork.SearchableRepository;
 
 namespace AbreuRocha.Codeflix.Catalog.IntegrationTests.InfraDataEF.Repositories.CategoryRepository;
@@ -75,17 +73,5 @@ public class CategoryRepositoryTestFixture
             _ => listClone.OrderBy(x => x.Name)
         };
         return orderedEnumerable.ToList();
-    }
-
-    public CodeflixCatalogDbContext CreateDbContext(bool preserveData = false)
-    {
-        var context = new CodeflixCatalogDbContext(
-                new DbContextOptionsBuilder<CodeflixCatalogDbContext>()
-                    .UseInMemoryDatabase("integration-tests-db")
-                    .Options
-            );
-        if (!preserveData)
-            context.Database.EnsureDeleted();
-        return context;
     }
 }

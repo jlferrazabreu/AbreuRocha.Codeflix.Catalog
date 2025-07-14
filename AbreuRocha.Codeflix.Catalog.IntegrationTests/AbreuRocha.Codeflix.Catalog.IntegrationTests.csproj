@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -27,6 +27,12 @@
   <ItemGroup>
     <ProjectReference Include="..\AbreuRocha.Codeflix.Catalog.Domain\AbreuRocha.Codeflix.Catalog.Domain.csproj" />
     <ProjectReference Include="..\AbreuRocha.Codeflix.Catalog.Infra.Data.EF\AbreuRocha.Codeflix.Catalog.Infra.Data.EF.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="xunit.runner.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

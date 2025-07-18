@@ -5,6 +5,7 @@ using AbreuRocha.Codeflix.Catalog.Infra.Data.EF;
 using FluentAssertions;
 using Xunit;
 using AbreuRocha.Codeflix.Catalog.Domain.Exceptions;
+using Microsoft.EntityFrameworkCore;
 
 
 
@@ -123,5 +124,9 @@ public class CreateCategoryTest
         await task.Should()
             .ThrowAsync<EntityValidationException>()
             .WithMessage(expectedExceptionMessage);
+        var dbCategoriesList = _fixture.CreateDbContext(true)
+            .Categories.AsNoTracking()
+            .ToList();
+        dbCategoriesList.Should().HaveCount(0);
     }
 }

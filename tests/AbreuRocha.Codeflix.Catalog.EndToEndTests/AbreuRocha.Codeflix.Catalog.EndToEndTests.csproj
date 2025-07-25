@@ -10,7 +10,8 @@
 
   <ItemGroup>
     <PackageReference Include="Bogus" Version="35.6.3" />
-    <PackageReference Include="FluentAssertions" Version="8.5.0" />
+    <PackageReference Include="FluentAssertions" Version="6.5.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="6.0.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="6.0.3" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
     <PackageReference Include="xunit" Version="2.4.1" />
@@ -25,14 +26,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AbreuRocha.Codeflix.Catalog.Domain\AbreuRocha.Codeflix.Catalog.Domain.csproj" />
-    <ProjectReference Include="..\AbreuRocha.Codeflix.Catalog.Infra.Data.EF\AbreuRocha.Codeflix.Catalog.Infra.Data.EF.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="xunit.runner.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    <ProjectReference Include="..\..\src\AbreuRocha.Codeflix.Catalog.Api\AbreuRocha.Codeflix.Catalog.Api.csproj" />
+    <ProjectReference Include="..\..\src\AbreuRocha.Codeflix.Catalog.Infra.Data.EF\AbreuRocha.Codeflix.Catalog.Infra.Data.EF.csproj" />
   </ItemGroup>
 
 </Project>

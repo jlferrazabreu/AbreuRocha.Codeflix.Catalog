@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -10,10 +10,9 @@
 
   <ItemGroup>
     <PackageReference Include="Bogus" Version="35.6.3" />
-    <PackageReference Include="FluentAssertions" Version="6.5.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="6.0.3" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="6.0.3" />
+    <PackageReference Include="FluentAssertions" Version="8.4.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
+    <PackageReference Include="Moq" Version="4.20.72" />
     <PackageReference Include="xunit" Version="2.4.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -26,8 +25,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AbreuRocha.Codeflix.Catalog.Api\AbreuRocha.Codeflix.Catalog.Api.csproj" />
-    <ProjectReference Include="..\AbreuRocha.Codeflix.Catalog.Infra.Data.EF\AbreuRocha.Codeflix.Catalog.Infra.Data.EF.csproj" />
+    <ProjectReference Include="..\..\src\AbreuRocha.Codeflix.Catalog.Application\AbreuRocha.Codeflix.Catalog.Application.csproj" />
+    <ProjectReference Include="..\..\src\AbreuRocha.Codeflix.Catalog.Domain\AbreuRocha.Codeflix.Catalog.Domain.csproj" />
   </ItemGroup>
 
 </Project>

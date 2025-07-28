@@ -1,5 +1,8 @@
 using AbreuRocha.Codeflix.Catalog.Application.UseCases.Category.Common;
 using AbreuRocha.Codeflix.Catalog.Application.UseCases.Category.CreateCategory;
+using AbreuRocha.Codeflix.Catalog.Application.UseCases.Category.DeleteCategory;
+
+//using AbreuRocha.Codeflix.Catalog.Application.UseCases.Category.DeleteCategory;
 using AbreuRocha.Codeflix.Catalog.Application.UseCases.Category.GetCategory;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -30,6 +33,7 @@ public class CategoriesController : ControllerBase
 
     [HttpGet("{id:guid}")]
     [ProducesResponseType(typeof(CategoryModelOutput), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
 
     public async Task<IActionResult> GetById(
         [FromRoute] Guid id,
@@ -37,5 +41,17 @@ public class CategoriesController : ControllerBase
     {
         var output = await _mediator.Send(new GetCategoryInput(id), cancellationToken);
         return Ok(output);
+    }
+
+    [HttpDelete("{id:guid}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
+
+    public async Task<IActionResult> Delete(
+        [FromRoute] Guid id,
+        CancellationToken cancellationToken)
+    {
+        var output = await _mediator.Send(new DeleteCategoryInput(id), cancellationToken);
+        return NoContent();
     }
 }

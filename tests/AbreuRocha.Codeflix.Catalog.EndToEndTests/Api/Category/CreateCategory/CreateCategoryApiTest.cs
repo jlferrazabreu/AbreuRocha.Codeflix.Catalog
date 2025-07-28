@@ -1,5 +1,4 @@
 ﻿using AbreuRocha.Codeflix.Catalog.Application.UseCases.Category.Common;
-using DomainEntity = AbreuRocha.Codeflix.Catalog.Domain.Entity;
 using Xunit;
 using FluentAssertions;
 using System.Net;
@@ -48,13 +47,13 @@ public class CreateCategoryApiTest
         dbCategory.IsActive.Should().Be(input.IsActive);
     }
 
-    [Theory(DisplayName = nameof(ThrowWhenCantInstantiateAggregate))]
+    [Theory(DisplayName = nameof(ErrorWhenCantInstantiateAggregate))]
     [Trait("EndToEnd/API", "Category/Create - Endpoints")]
     [MemberData(
         nameof(CreateCategoryApiTestDataGenerator.GetInvalidInputs),
         MemberType = typeof(CreateCategoryApiTestDataGenerator)
     )]
-    public async Task ThrowWhenCantInstantiateAggregate(
+    public async Task ErrorWhenCantInstantiateAggregate(
         CreateCategoryInput input,
         string expectedDetail
     ){

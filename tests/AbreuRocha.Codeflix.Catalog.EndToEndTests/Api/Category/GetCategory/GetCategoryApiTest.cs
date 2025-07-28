@@ -36,9 +36,9 @@ public class GetCategoryApiTest
         output.CreatedAt.Should().Be(exampleCategory.CreatedAt);
     }
 
-    [Fact(DisplayName = nameof(TrowWhenNotFound))]
+    [Fact(DisplayName = nameof(ErrorWhenNotFound))]
     [Trait("EndToEnd/API", "Category/Get - Endpoints")]
-    public async Task TrowWhenNotFound()
+    public async Task ErrorWhenNotFound()
     {
         var exampleCategoriesList = _fixture.GetExampleCategoriesList(20);
         await _fixture.Persistence.InsertList(exampleCategoriesList);

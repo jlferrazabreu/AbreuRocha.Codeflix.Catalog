@@ -1,5 +1,6 @@
 ﻿using AbreuRocha.Codeflix.Catalog.Application.UseCases.Category.GetCategory;
 using FluentAssertions;
+using FluentValidation;
 using Xunit;
 
 namespace AbreuRocha.Codeflix.Catalog.UnitTests.Application.Category.GetCategory;
@@ -28,6 +29,7 @@ public class GetCategoryInputValidatorTest
     [Trait("Application", "GetCategoryInputValidationTest - UseCases")]
     public void InvalidWhenEmptyGuid()
     {
+        ValidatorOptions.Global.LanguageManager.Enabled = false;
         var invalidInput = new GetCategoryInput(Guid.Empty);
         var validator = new GetCategoryInputValidator();
 

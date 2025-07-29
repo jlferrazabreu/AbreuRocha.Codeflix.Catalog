@@ -2,7 +2,9 @@ using AbreuRocha.Codeflix.Catalog.Application.UseCases.Category.Common;
 using AbreuRocha.Codeflix.Catalog.Application.UseCases.Category.CreateCategory;
 using AbreuRocha.Codeflix.Catalog.Application.UseCases.Category.DeleteCategory;
 using AbreuRocha.Codeflix.Catalog.Application.UseCases.Category.GetCategory;
+using AbreuRocha.Codeflix.Catalog.Application.UseCases.Category.ListCategories;
 using AbreuRocha.Codeflix.Catalog.Application.UseCases.Category.UpdateCategory;
+using AbreuRocha.Codeflix.Catalog.Domain.SeedWork.SearchableRepository;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -62,6 +64,28 @@ public class CategoriesController : ControllerBase
         [FromBody] UpdateCategoryInput input,
         CancellationToken cancellationToken)
     {
+        var output = await _mediator.Send(input, cancellationToken);
+        return Ok(output);
+    }
+
+    [HttpGet]
+    [ProducesResponseType(typeof(CategoryModelOutput), StatusCodes.Status200OK)]
+
+    public async Task<IActionResult> List(
+        CancellationToken cancellationToken,
+        [FromQuery] int? page = null,
+        [FromQuery] int? perPage = null,
+        [FromQuery] string? search = null,
+        [FromQuery] string? sort = null,
+        [FromQuery] SearchOrder? dir = null)
+    {
+        var input = new ListCategoriesInput();
+        if (page is not null) input.Page = page.Value;
+        if (perPage is not null) input.PerPage = perPage.Value;
+        if (!String.IsNullOrWhiteSpace(search)) input.Search = search;
+        if (!String.IsNullOrWhiteSpace(sort)) input.Sort = sort;
+        if (dir is not null) input.Dir = dir.Value;
+
         var output = await _mediator.Send(input, cancellationToken);
         return Ok(output);
     }

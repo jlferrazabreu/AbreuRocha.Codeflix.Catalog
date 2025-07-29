@@ -8,6 +8,7 @@ using Xunit;
 namespace AbreuRocha.Codeflix.Catalog.EndToEndTests.Api.Category.GetCategory;
 [Collection(nameof(GetCategoryApiTestFixture))]
 public class GetCategoryApiTest
+    : IDisposable
 {
     private readonly GetCategoryApiTestFixture _fixture;
     public GetCategoryApiTest(GetCategoryApiTestFixture fixture) 
@@ -57,4 +58,7 @@ public class GetCategoryApiTest
         output.Detail.Should().Be($"Category '{randomGuid}' not found.");
         output.Type.Should().Be("NotFound");
     }
+
+    public void Dispose()
+        => _fixture.ClenPersistence();
 }

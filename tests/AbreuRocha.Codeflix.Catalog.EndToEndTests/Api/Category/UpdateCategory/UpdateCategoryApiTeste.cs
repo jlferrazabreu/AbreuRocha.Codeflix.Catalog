@@ -11,6 +11,7 @@ namespace AbreuRocha.Codeflix.Catalog.EndToEndTests.Api.Category.UpdateCategory;
 
 [Collection(nameof(UpdateCategoryApiTestFixture))]
 public class UpdateCategoryApiTest
+    : IDisposable
 {
     private readonly UpdateCategoryApiTestFixture _fixture;
     public UpdateCategoryApiTest(UpdateCategoryApiTestFixture fixture) 
@@ -160,4 +161,6 @@ public class UpdateCategoryApiTest
         output.Status.Should().Be(StatusCodes.Status422UnprocessableEntity);
         output.Detail.Should().Be(expectedDetails);
     }
+    public void Dispose()
+        => _fixture.ClenPersistence();
 }

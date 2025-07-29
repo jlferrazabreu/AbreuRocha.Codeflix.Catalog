@@ -1,12 +1,11 @@
-﻿using AbreuRocha.Codeflix.Catalog.IntegrationTests.Application.UseCases.Category.GetCategory;
-using UseCase = AbreuRocha.Codeflix.Catalog.Application.UseCases.Category.GetCategory;
+﻿using UseCase = AbreuRocha.Codeflix.Catalog.Application.UseCases.Category.GetCategory;
 using AbreuRocha.Codeflix.Catalog.Infra.Data.EF.Repositories;
 using FluentAssertions;
 using Xunit;
 using AbreuRocha.Codeflix.Catalog.Application.Exceptions;
 
 
-
+namespace AbreuRocha.Codeflix.Catalog.IntegrationTests.Application.UseCases.Category.GetCategory;
 [Collection(nameof(GetCategoryTestFixture))]
 public class GetCategoryTest
 {

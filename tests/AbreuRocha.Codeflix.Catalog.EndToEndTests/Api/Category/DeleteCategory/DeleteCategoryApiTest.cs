@@ -7,6 +7,7 @@ using Xunit;
 namespace AbreuRocha.Codeflix.Catalog.EndToEndTests.Api.Category.DeleteCategory;
     [Collection(nameof(DeleteCategoryApiTestFixture))]
 public class DeleteCategoryApiTest
+    :IDisposable
 {
     private readonly DeleteCategoryApiTestFixture _fixture;
     public DeleteCategoryApiTest(DeleteCategoryApiTestFixture fixture)
@@ -54,5 +55,8 @@ public class DeleteCategoryApiTest
         output!.Status.Should().Be(StatusCodes.Status404NotFound);
         output!.Detail.Should().Be($"Category '{randomGuid}' not found.");
     }
+
+    public void Dispose()
+        => _fixture.ClenPersistence();
 }
 

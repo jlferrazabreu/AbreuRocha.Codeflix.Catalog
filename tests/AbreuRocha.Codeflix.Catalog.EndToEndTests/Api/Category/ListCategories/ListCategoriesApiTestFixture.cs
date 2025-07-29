@@ -1,16 +1,17 @@
-﻿using AbreuRocha.Codeflix.Catalog.Domain.SeedWork.SearchableRepository;
-using AbreuRocha.Codeflix.Catalog.IntegrationTests.Application.UseCases.Common;
+﻿using AbreuRocha.Codeflix.Catalog.Domain.SeedWork;
+using AbreuRocha.Codeflix.Catalog.Domain.SeedWork.SearchableRepository;
+using AbreuRocha.Codeflix.Catalog.EndToEndTests.Api.Category.Common;
 using Xunit;
 using DomainEntity = AbreuRocha.Codeflix.Catalog.Domain.Entity;
 
-namespace AbreuRocha.Codeflix.Catalog.IntegrationTests.Application.UseCases.Category.ListCategories;
-[CollectionDefinition(nameof(ListCategoriesTesteFixture))]
-public class ListCategoriesTestFixtureCollection
-    : ICollectionFixture<ListCategoriesTesteFixture>
-{ }
+namespace AbreuRocha.Codeflix.Catalog.EndToEndTests.Api.Category.ListCategories;
 
-public class ListCategoriesTesteFixture
-    : CategoryUseCasesBaseFixture
+[CollectionDefinition(nameof(ListCategoriesApiTestFixture))]
+public class ListCategoriesApiTestFixtureCollection
+    : ICollectionFixture<ListCategoriesApiTestFixture>
+{ }
+public class ListCategoriesApiTestFixture
+    : CategoryBaseFixture
 {
     public List<DomainEntity.Category> GetExampleCategoriesListWithNames(List<string> names)
         => names.Select(name =>
@@ -36,6 +37,7 @@ public class ListCategoriesTesteFixture
             ("createdat", SearchOrder.Desc) => listClone.OrderByDescending(x => x.CreatedAt),
             _ => listClone.OrderBy(x => x.Name)
         };
-        return orderedEnumerable.ToList();
+        return orderedEnumerable
+            .ThenBy(x => x.CreatedAt).ToList();
     }
 }

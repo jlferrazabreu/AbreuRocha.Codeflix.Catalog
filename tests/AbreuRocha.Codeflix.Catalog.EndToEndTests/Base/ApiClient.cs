@@ -1,4 +1,6 @@
-﻿using System.Text;
+﻿using AbreuRocha.Codeflix.Catalog.Application.UseCases.Category.ListCategories;
+using Microsoft.AspNetCore.WebUtilities;
+using System.Text;
 using System.Text.Json;
 using Xunit.Sdk;
 
@@ -24,10 +26,13 @@ public class ApiClient
         var output = await GetOutput<TOutput>(response);
         return (response, output);
     }
-    public async Task<(HttpResponseMessage?, TOutput?)> Get<TOutput>(string route)
+    public async Task<(HttpResponseMessage?, TOutput?)> Get<TOutput>(
+        string route, 
+        object? queryStringParameterObjects = null)
         where TOutput : class
     {
-        var response = await _httpClient.GetAsync(route);
+        var url = PrepareGetRoute(route, queryStringParameterObjects);
+        var response = await _httpClient.GetAsync(url);
         var output = await GetOutput<TOutput>(response);
         return (response, output);
     }
@@ -69,5 +74,15 @@ public class ApiClient
             }
         );
         return output;
+    }
+
+    private string PrepareGetRoute(string route, object? queryStringParameterObjects)
+    {
+        if (queryStringParameterObjects == null)
+            return route;
+        var parameterJason = JsonSerializer.Serialize(queryStringParameterObjects);
+        var paremetersDictionary = Newtonsoft.Json.JsonConvert
+            .DeserializeObject<Dictionary<string, string>>(parameterJason);
+        return QueryHelpers.AddQueryString(route, paremetersDictionary!);
     }
 }

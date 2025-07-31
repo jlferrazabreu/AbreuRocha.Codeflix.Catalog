@@ -1,5 +1,5 @@
 ﻿using AbreuRocha.Codeflix.Catalog.Application.Interfaces;
-using Entity = AbreuRocha.Codeflix.Catalog.Domain.Entity;
+using DomainEntity = AbreuRocha.Codeflix.Catalog.Domain.Entity;
 using AbreuRocha.Codeflix.Catalog.Domain.Repository;
 using AbreuRocha.Codeflix.Catalog.UnitTests.Common;
 using Moq;
@@ -35,7 +35,7 @@ public abstract class CategoryUseCaseBaseFixture
     public bool GetRandomBoolean()
         => new Random().NextDouble() < 0.5;
 
-    public Entity.Category GetExampleCategory()
+    public DomainEntity.Category GetExampleCategory()
         => new(
             GetValidCategoryName(),
             GetValidCategoryDescription(),

@@ -6,17 +6,24 @@ namespace AbreuRocha.Codeflix.Catalog.Api.Configurations;
 public static class ConectionsConfiguration
 {
     public static IServiceCollection AddAppConections(
-        this IServiceCollection services)
+        this IServiceCollection services,
+        IConfiguration configuration)
     {
-        services.AddDbConection();
+        services.AddDbConection(configuration);
         return services;
     }
 
     private static IServiceCollection AddDbConection(
-        this IServiceCollection services)
+        this IServiceCollection services,
+        IConfiguration configuration)
     {
+        var connectionString = configuration
+            .GetConnectionString("CatalogDb");
         services.AddDbContext<CodeflixCatalogDbContext>(
-            options => options.UseInMemoryDatabase("InMemory-DSV-Database")
+            options => options.UseMySql(
+                connectionString,
+                ServerVersion
+                    .AutoDetect(connectionString))
             );
         return services;
     }

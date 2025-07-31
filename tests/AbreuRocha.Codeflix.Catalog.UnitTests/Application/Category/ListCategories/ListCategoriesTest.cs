@@ -1,5 +1,5 @@
 ﻿using UseCase = AbreuRocha.Codeflix.Catalog.Application.UseCases.Category.ListCategories;
-using Entity = AbreuRocha.Codeflix.Catalog.Domain.Entity;
+using DomainEntity = AbreuRocha.Codeflix.Catalog.Domain.Entity;
 using AbreuRocha.Codeflix.Catalog.Domain.SeedWork.SearchableRepository;
 using Moq;
 using Xunit;
@@ -21,7 +21,7 @@ public class ListCategoriesTest
         var categoriesExampleList = _fixture.GetExampleCategoriesList();
         var repositoryMock = _fixture.GetRepositoryMock();
         var input = _fixture.GetExampleInput();
-        var outputRepositorySearch = new SearchOutput<Entity.Category>(
+        var outputRepositorySearch = new SearchOutput<DomainEntity.Category>(
                 currentPage: input.Page,
                 perPage: input.PerPage,
                 items: categoriesExampleList,
@@ -75,10 +75,10 @@ public class ListCategoriesTest
     {
         var repositoryMock = _fixture.GetRepositoryMock();
         var input = _fixture.GetExampleInput();
-        var outputRepositorySearch = new SearchOutput<Entity.Category>(
+        var outputRepositorySearch = new SearchOutput<DomainEntity.Category>(
                 currentPage: input.Page,
                 perPage: input.PerPage,
-                items: new List<Entity.Category>().AsReadOnly(),
+                items: new List<DomainEntity.Category>().AsReadOnly(),
                 total: 0
         );
         repositoryMock.Setup(x => x.Search(
@@ -126,7 +126,7 @@ public class ListCategoriesTest
     {
         var categoriesExampleList = _fixture.GetExampleCategoriesList();
         var repositoryMock = _fixture.GetRepositoryMock();
-        var outputRepositorySearch = new SearchOutput<Entity.Category>(
+        var outputRepositorySearch = new SearchOutput<DomainEntity.Category>(
                 currentPage: input.Page,
                 perPage: input.PerPage,
                 items: categoriesExampleList,

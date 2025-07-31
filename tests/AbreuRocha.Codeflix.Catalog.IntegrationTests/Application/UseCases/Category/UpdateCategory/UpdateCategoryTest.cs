@@ -1,8 +1,6 @@
-﻿using AbreuRocha.Codeflix.Catalog.Application.UseCases.Category.Common;
-using AbreuRocha.Codeflix.Catalog.Application.UseCases.Category.UpdateCategory;
-using AbreuRocha.Codeflix.Catalog.Domain.SeedWork;
+﻿using AbreuRocha.Codeflix.Catalog.Application.UseCases.Category.UpdateCategory;
 using UseCase = AbreuRocha.Codeflix.Catalog.Application.UseCases.Category.UpdateCategory;
-using Entity = AbreuRocha.Codeflix.Catalog.Domain.Entity;
+using DomainEntity = AbreuRocha.Codeflix.Catalog.Domain.Entity;
 using Xunit;
 using AbreuRocha.Codeflix.Catalog.Infra.Data.EF;
 using AbreuRocha.Codeflix.Catalog.Infra.Data.EF.Repositories;
@@ -28,7 +26,7 @@ public class UpdateCategoryTest
         MemberType = typeof(UpdateCategoryTestDataGenerator)
     )]
     public async Task UpdateCategory(
-        Entity.Category exampleCategory,
+        DomainEntity.Category exampleCategory,
         UpdateCategoryInput input)
     {
         var dbContext = _fixture.CreateDbContext();
@@ -66,7 +64,7 @@ public class UpdateCategoryTest
         MemberType = typeof(UpdateCategoryTestDataGenerator)
     )]
     public async Task UpdateCategoryWithoutIsActive(
-        Entity.Category exampleCategory,
+        DomainEntity.Category exampleCategory,
         UpdateCategoryInput exampleInput)
     {
         var input = new UpdateCategoryInput(
@@ -109,7 +107,7 @@ public class UpdateCategoryTest
         MemberType = typeof(UpdateCategoryTestDataGenerator)
     )]
     public async Task UpdateCategoryOnlyName(
-        Entity.Category exampleCategory,
+        DomainEntity.Category exampleCategory,
         UpdateCategoryInput exampleInput)
     {
         var input = new UpdateCategoryInput(

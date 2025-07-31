@@ -13,6 +13,5 @@ internal class CategoryConfiguration
             .HasMaxLength(255);
         builder.Property(category => category.Description)
             .HasMaxLength(1000);
-
     }
 }

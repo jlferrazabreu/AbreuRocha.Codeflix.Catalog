@@ -75,7 +75,7 @@ public class DomainValidationTest
         string fieldName = Faker.Commerce.ProductName().Replace(" ", "");
 
         Action action =
-        () => DomainValidation.MinLength(target, minLength, fieldName);
+        () => DomainValidation.MinLength(target!, minLength, fieldName);
 
         action.Should()
             .Throw<EntityValidationException>()
@@ -90,7 +90,7 @@ public class DomainValidationTest
         string fieldName = Faker.Commerce.ProductName().Replace(" ", "");
 
         Action action =
-        () => DomainValidation.MinLength(target, minLength, fieldName);
+        () => DomainValidation.MinLength(target!, minLength, fieldName);
 
         action.Should().NotThrow();
     }

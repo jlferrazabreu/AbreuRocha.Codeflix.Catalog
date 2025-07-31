@@ -1,4 +1,5 @@
-﻿using AbreuRocha.Codeflix.Catalog.Api.Filters;
+﻿using AbreuRocha.Codeflix.Catalog.Api.Configurations.Policies;
+using AbreuRocha.Codeflix.Catalog.Api.Filters;
 
 namespace AbreuRocha.Codeflix.Catalog.Api.Configurations;
 
@@ -7,8 +8,15 @@ public static class ControllersConfiguration
     public static IServiceCollection AddAndConfigureControllers(
         this IServiceCollection services)
     {
-        services.AddControllers(options => options.Filters.Add(typeof(ApiGlobalExceptionFilter))
-        );
+        services
+            .AddControllers(options 
+                => options.Filters.Add(typeof(ApiGlobalExceptionFilter))
+        )
+            .AddJsonOptions(jsonOptions =>
+            {
+                jsonOptions.JsonSerializerOptions.PropertyNamingPolicy = 
+                    new JsonSnekeCasePolicy();
+            });
         services.AddDocumentation();
         return services;
     }

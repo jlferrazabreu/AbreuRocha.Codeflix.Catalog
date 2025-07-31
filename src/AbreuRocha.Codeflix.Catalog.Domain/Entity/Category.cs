@@ -1,5 +1,4 @@
-﻿using AbreuRocha.Codeflix.Catalog.Domain.Exceptions;
-using AbreuRocha.Codeflix.Catalog.Domain.SeedWork;
+﻿using AbreuRocha.Codeflix.Catalog.Domain.SeedWork;
 using AbreuRocha.Codeflix.Catalog.Domain.Validation;
 
 namespace AbreuRocha.Codeflix.Catalog.Domain.Entity;

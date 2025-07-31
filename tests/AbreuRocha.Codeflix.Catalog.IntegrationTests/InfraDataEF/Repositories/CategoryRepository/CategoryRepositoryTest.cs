@@ -1,6 +1,5 @@
 ﻿using AbreuRocha.Codeflix.Catalog.Infra.Data.EF;
 using Repository = AbreuRocha.Codeflix.Catalog.Infra.Data.EF.Repositories;
-using Microsoft.EntityFrameworkCore;
 using Xunit;
 using FluentAssertions;
 using AbreuRocha.Codeflix.Catalog.Application.Exceptions;

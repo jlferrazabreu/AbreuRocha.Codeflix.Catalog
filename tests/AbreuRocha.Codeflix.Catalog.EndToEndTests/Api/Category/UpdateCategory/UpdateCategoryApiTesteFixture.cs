@@ -1,4 +1,4 @@
-﻿using AbreuRocha.Codeflix.Catalog.Application.UseCases.Category.UpdateCategory;
+﻿using AbreuRocha.Codeflix.Catalog.Api.ApiModels.Category;
 using AbreuRocha.Codeflix.Catalog.EndToEndTests.Api.Category.Common;
 using Xunit;
 
@@ -11,9 +11,8 @@ public class UpdateCategoryApiTestFixtureCollection
 public class UpdateCategoryApiTestFixture
     : CategoryBaseFixture
 {
-    public UpdateCategoryInput GetExampleInput(Guid? id = null)
+    public UpdateCategoryApiInput GetExampleInput()
         => new(
-            id ?? Guid.NewGuid(),
             GetValidCategoryName(),
             GetValidCategoryDescription(),
             GetRandomBoolean()

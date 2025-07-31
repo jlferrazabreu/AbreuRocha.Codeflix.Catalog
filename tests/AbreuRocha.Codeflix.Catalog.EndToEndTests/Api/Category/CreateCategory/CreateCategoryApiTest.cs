@@ -1,12 +1,15 @@
 ﻿using AbreuRocha.Codeflix.Catalog.Application.UseCases.Category.Common;
-using Xunit;
-using FluentAssertions;
-using System.Net;
 using AbreuRocha.Codeflix.Catalog.Application.UseCases.Category.CreateCategory;
-using Microsoft.AspNetCore.Mvc;
+using AbreuRocha.Codeflix.Catalog.EndToEndTests.Extensions.DateTime;
+using AbreuRocha.Codeflix.Catalog.EndToEndTests.Models;
+using FluentAssertions;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using System.Net;
+using Xunit;
 
 namespace AbreuRocha.Codeflix.Catalog.EndToEndTests.Api.Category.CreateCategory;
+
 [Collection(nameof(CreateCategoryApiTestFixture))]
 public class CreateCategoryApiTest
     : IDisposable
@@ -23,7 +26,7 @@ public class CreateCategoryApiTest
         var input = _fixture.GetExampleInput();
         
         var (response, output) = await _fixture
-            .ApiClient.Post<CategoryModelOutput>(
+            .ApiClient.Post<TestApiResponse<CategoryModelOutput>>(
                 "/categories",
                 input
             );
@@ -31,17 +34,18 @@ public class CreateCategoryApiTest
         response.Should().NotBeNull();
         response!.StatusCode.Should().Be(HttpStatusCode.Created);
         output.Should().NotBeNull();
-        output!.Id.Should().NotBeEmpty();
-        output.CreatedAt.Should()
+        output!.Data.Should().NotBeNull();
+        output!.Data!.Id.Should().NotBeEmpty();
+        output.Data.CreatedAt.Should()
             .NotBeSameDateAs(default);
-        output.Name.Should().Be(input.Name);
-        output.Description.Should().Be(input.Description);
-        output.IsActive.Should().Be(input.IsActive);
+        output.Data.Name.Should().Be(input.Name);
+        output.Data.Description.Should().Be(input.Description);
+        output.Data.IsActive.Should().Be(input.IsActive);
         var dbCategory = await _fixture
-            .Persistence.GetById(output.Id);
+            .Persistence.GetById(output.Data.Id);
         dbCategory.Should().NotBeNull();
         dbCategory!.Id.Should().NotBeEmpty();
-        dbCategory.CreatedAt.Should()
+        dbCategory.CreatedAt.TrimMillisseconds().Should()
             .NotBeSameDateAs(default);
         dbCategory.Name.Should().Be(input.Name);
         dbCategory.Description.Should().Be(input.Description);

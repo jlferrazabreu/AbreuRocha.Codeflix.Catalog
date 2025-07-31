@@ -1,6 +1,4 @@
-﻿using AbreuRocha.Codeflix.Catalog.UnitTests.Application.Category.CreateCategory;
-
-namespace AbreuRocha.Codeflix.Catalog.UnitTests.Application.Category.CreateCategory;
+﻿namespace AbreuRocha.Codeflix.Catalog.UnitTests.Application.Category.CreateCategory;
 public class CreateCategoryTestDataGenerator
 {
     public static IEnumerable<object[]> GetInvalidInputs(int times = 12)

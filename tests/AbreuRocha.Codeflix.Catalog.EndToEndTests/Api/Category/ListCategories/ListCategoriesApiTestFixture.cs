@@ -1,5 +1,4 @@
-﻿using AbreuRocha.Codeflix.Catalog.Domain.SeedWork;
-using AbreuRocha.Codeflix.Catalog.Domain.SeedWork.SearchableRepository;
+﻿using AbreuRocha.Codeflix.Catalog.Domain.SeedWork.SearchableRepository;
 using AbreuRocha.Codeflix.Catalog.EndToEndTests.Api.Category.Common;
 using Xunit;
 using DomainEntity = AbreuRocha.Codeflix.Catalog.Domain.Entity;
@@ -29,15 +28,17 @@ public class ListCategoriesApiTestFixture
         var listClone = new List<DomainEntity.Category>(categoriesList);
         var orderedEnumerable = (orderBy.ToLower(), order) switch
         {
-            ("name", SearchOrder.Asc) => listClone.OrderBy(x => x.Name),
-            ("name", SearchOrder.Desc) => listClone.OrderByDescending(x => x.Name),
+            ("name", SearchOrder.Asc) => listClone.OrderBy(x => x.Name)
+                .ThenBy(x => x.Id),
+            ("name", SearchOrder.Desc) => listClone.OrderByDescending(x => x.Name)
+                .ThenByDescending(x => x.Id),
             ("id", SearchOrder.Asc) => listClone.OrderBy(x => x.Id),
             ("id", SearchOrder.Desc) => listClone.OrderByDescending(x => x.Id),
             ("createdat", SearchOrder.Asc) => listClone.OrderBy(x => x.CreatedAt),
             ("createdat", SearchOrder.Desc) => listClone.OrderByDescending(x => x.CreatedAt),
             _ => listClone.OrderBy(x => x.Name)
+                .ThenBy(x => x.Id)
         };
-        return orderedEnumerable
-            .ThenBy(x => x.CreatedAt).ToList();
+        return orderedEnumerable.ToList();
     }
 }

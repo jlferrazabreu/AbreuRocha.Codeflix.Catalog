@@ -1,5 +1,5 @@
 ﻿using AbreuRocha.Codeflix.Catalog.IntegrationTests.Base;
-using Entity = AbreuRocha.Codeflix.Catalog.Domain.Entity;
+using DomainEntity = AbreuRocha.Codeflix.Catalog.Domain.Entity;
 
 namespace AbreuRocha.Codeflix.Catalog.IntegrationTests.Application.UseCases.Common;
 public class CategoryUseCasesBaseFixture
@@ -28,14 +28,14 @@ public class CategoryUseCasesBaseFixture
     public bool GetRandomBoolean()
         => new Random().NextDouble() < 0.5;
 
-    public Entity.Category GetExampleCategory()
+    public DomainEntity.Category GetExampleCategory()
         => new(
             GetValidCategoryName(),
             GetValidCategoryDescription(),
             GetRandomBoolean()
         );
 
-    public List<Entity.Category> GetExampleCategoriesList(int length = 10)
+    public List<DomainEntity.Category> GetExampleCategoriesList(int length = 10)
         => Enumerable
             .Range(1, length)
             .Select(_ => GetExampleCategory())

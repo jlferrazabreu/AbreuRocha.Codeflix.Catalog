@@ -1,5 +1,5 @@
 ﻿using AbreuRocha.Codeflix.Catalog.Application.UseCases.Category.CreateCategory;
-using Entity = AbreuRocha.Codeflix.Catalog.Domain.Entity;
+using DomainEntity = AbreuRocha.Codeflix.Catalog.Domain.Entity;
 using AbreuRocha.Codeflix.Catalog.Domain.Exceptions;
 using FluentAssertions;
 using Moq;
@@ -34,7 +34,7 @@ public class CreateCategoryTest
 
         repositoryMock.Verify(
             repository => repository.Insert(
-                It.IsAny<Entity.Category>(),
+                It.IsAny<DomainEntity.Category>(),
                 It.IsAny<CancellationToken>()
             ),
             Times.Once
@@ -72,7 +72,7 @@ public class CreateCategoryTest
 
         repositoryMock.Verify(
             repository => repository.Insert(
-                It.IsAny<Entity.Category>(),
+                It.IsAny<DomainEntity.Category>(),
                 It.IsAny<CancellationToken>()
             ),
             Times.Once
@@ -111,7 +111,7 @@ public class CreateCategoryTest
 
         repositoryMock.Verify(
             repository => repository.Insert(
-                It.IsAny<Entity.Category>(),
+                It.IsAny<DomainEntity.Category>(),
                 It.IsAny<CancellationToken>()
             ),
             Times.Once

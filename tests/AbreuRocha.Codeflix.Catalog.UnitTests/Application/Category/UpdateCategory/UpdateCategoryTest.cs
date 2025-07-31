@@ -1,7 +1,7 @@
 ﻿using AbreuRocha.Codeflix.Catalog.Application.Exceptions;
 using AbreuRocha.Codeflix.Catalog.Application.UseCases.Category.Common;
 using AbreuRocha.Codeflix.Catalog.Application.UseCases.Category.UpdateCategory;
-using Entity = AbreuRocha.Codeflix.Catalog.Domain.Entity;
+using DomainEntity = AbreuRocha.Codeflix.Catalog.Domain.Entity;
 using AbreuRocha.Codeflix.Catalog.Domain.Exceptions;
 using FluentAssertions;
 using Moq;
@@ -25,7 +25,7 @@ public class UpdateCategoryTest
         MemberType = typeof(UpdateCategoryTestDataGenerator)
     )]
     public async Task UpdateCategory(
-        Entity.Category exampleCategory,
+        DomainEntity.Category exampleCategory,
         UpdateCategoryInput input)
     {
         var repositoryMock = _fixture.GetRepositoryMock();
@@ -74,7 +74,7 @@ public class UpdateCategoryTest
         MemberType = typeof(UpdateCategoryTestDataGenerator)
     )]
     public async Task UpdateCategoryWithoutProvidingIsActive(
-        Entity.Category exampleCategory,
+        DomainEntity.Category exampleCategory,
         UpdateCategoryInput exampleInput)
     {
         var input = new UpdateCategoryInput(
@@ -128,7 +128,7 @@ public class UpdateCategoryTest
         MemberType = typeof(UpdateCategoryTestDataGenerator)
     )]
     public async Task UpdateCategoryOnlyName(
-        Entity.Category exampleCategory,
+        DomainEntity.Category exampleCategory,
         UpdateCategoryInput exampleInput)
     {
         var input = new UpdateCategoryInput(

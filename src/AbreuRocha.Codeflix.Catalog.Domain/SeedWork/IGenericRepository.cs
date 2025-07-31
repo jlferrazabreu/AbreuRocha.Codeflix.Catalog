@@ -1,6 +1,4 @@
-﻿using AbreuRocha.Codeflix.Catalog.Domain.Entity;
-
-namespace AbreuRocha.Codeflix.Catalog.Domain.SeedWork;
+﻿namespace AbreuRocha.Codeflix.Catalog.Domain.SeedWork;
 public interface IGenericRepository<TAggregate> : IRepository
     where TAggregate : AggregateRoot
 {

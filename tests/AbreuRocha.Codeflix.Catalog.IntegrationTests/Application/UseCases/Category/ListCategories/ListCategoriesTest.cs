@@ -1,5 +1,4 @@
-﻿using  UseCase = AbreuRocha.Codeflix.Catalog.Application.UseCases.Category.ListCategories;
-using AbreuRocha.Codeflix.Catalog.Domain.SeedWork;
+﻿using UseCase = AbreuRocha.Codeflix.Catalog.Application.UseCases.Category.ListCategories;
 using AbreuRocha.Codeflix.Catalog.Domain.SeedWork.SearchableRepository;
 using AbreuRocha.Codeflix.Catalog.Infra.Data.EF;
 using AbreuRocha.Codeflix.Catalog.Infra.Data.EF.Repositories;

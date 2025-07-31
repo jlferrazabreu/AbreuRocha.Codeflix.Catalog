@@ -6,8 +6,4 @@ public interface ISearchableRepository<TAggregate>
         SearchInput input,
         CancellationToken cancellationToken
     );
-    //Task<int> Count(
-    //    string search,
-    //    CancellationToken cancellationToken
-    //);
 }

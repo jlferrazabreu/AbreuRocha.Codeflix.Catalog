@@ -1,6 +1,4 @@
-﻿using AbreuRocha.Codeflix.Catalog.EndToEndTests.Api.Category.CreateCategory;
-
-namespace AbreuRocha.Codeflix.Catalog.EndToEndTests.Api.Category.UpdateCategory;
+﻿namespace AbreuRocha.Codeflix.Catalog.EndToEndTests.Api.Category.UpdateCategory;
 public class UpdateCategoryApiTestDataGenerator
 {
     public static IEnumerable<object[]> GetInvalidInputs()

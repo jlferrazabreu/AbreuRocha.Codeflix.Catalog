@@ -253,7 +253,9 @@ ClientBin/
 *.dbproj.schemaview
 *.jfm
 *.pfx
+*.db
 *.publishsettings
+*.sqlite
 orleans.codegen.cs
 
 # Including strong name files can present a security risk
@@ -416,3 +418,10 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
+
+# SQL Server files
+App_Data/*.mdf
+App_Data/*.ldf
+
+
+/catalogdb

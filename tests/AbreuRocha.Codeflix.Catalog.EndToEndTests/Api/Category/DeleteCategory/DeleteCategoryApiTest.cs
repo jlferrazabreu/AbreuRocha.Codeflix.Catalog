@@ -5,7 +5,8 @@ using System.Net;
 using Xunit;
 
 namespace AbreuRocha.Codeflix.Catalog.EndToEndTests.Api.Category.DeleteCategory;
-    [Collection(nameof(DeleteCategoryApiTestFixture))]
+
+[Collection(nameof(DeleteCategoryApiTestFixture))]
 public class DeleteCategoryApiTest
     :IDisposable
 {

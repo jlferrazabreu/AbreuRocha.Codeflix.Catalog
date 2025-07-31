@@ -1,5 +1,5 @@
 ﻿using AbreuRocha.Codeflix.Catalog.Application.UseCases.Category.ListCategories;
-using Entity = AbreuRocha.Codeflix.Catalog.Domain.Entity;
+using DomainEntity = AbreuRocha.Codeflix.Catalog.Domain.Entity;
 using AbreuRocha.Codeflix.Catalog.Domain.SeedWork.SearchableRepository;
 using AbreuRocha.Codeflix.Catalog.UnitTests.Application.Category.Common;
 using Xunit;
@@ -12,9 +12,9 @@ public class ListCategoriesTestFixtureCollection : ICollectionFixture<ListCatego
 public class ListCategoriesTestFixture
     :CategoryUseCaseBaseFixture
 {
-    public List<Entity.Category> GetExampleCategoriesList(int length = 10)
+    public List<DomainEntity.Category> GetExampleCategoriesList(int length = 10)
     {
-        var list = new List<Entity.Category>();
+        var list = new List<DomainEntity.Category>();
         for (int i = 0; i < length; i++)
             list.Add(GetExampleCategory());
 

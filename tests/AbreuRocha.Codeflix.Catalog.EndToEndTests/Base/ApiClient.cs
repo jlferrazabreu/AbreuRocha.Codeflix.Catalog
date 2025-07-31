@@ -1,16 +1,22 @@
-﻿using AbreuRocha.Codeflix.Catalog.Application.UseCases.Category.ListCategories;
+﻿using AbreuRocha.Codeflix.Catalog.Api.Configurations.Policies;
 using Microsoft.AspNetCore.WebUtilities;
 using System.Text;
 using System.Text.Json;
-using Xunit.Sdk;
 
 namespace AbreuRocha.Codeflix.Catalog.EndToEndTests.Base;
+
 public class ApiClient
 {
     private readonly HttpClient _httpClient;
+    private readonly JsonSerializerOptions _defaultSerializerOptions;
     public ApiClient(HttpClient httpClient)
     {
         _httpClient = httpClient;
+        _defaultSerializerOptions = new JsonSerializerOptions
+        {
+            PropertyNamingPolicy = new JsonSnekeCasePolicy(),
+            PropertyNameCaseInsensitive = true
+        };
     }
     public async Task<(HttpResponseMessage?, TOutput?)> Post<TOutput>(string route, object payload)
         where TOutput : class
@@ -18,7 +24,9 @@ public class ApiClient
         var response = await _httpClient.PostAsync(
             route
             , new StringContent(
-                JsonSerializer.Serialize(payload),
+                JsonSerializer.Serialize(
+                    payload, 
+                    _defaultSerializerOptions),
                 Encoding.UTF8,
                 "application/json"
             )
@@ -51,7 +59,9 @@ public class ApiClient
         var response = await _httpClient.PutAsync(
             route
             , new StringContent(
-                JsonSerializer.Serialize(payload),
+                JsonSerializer.Serialize(
+                    payload, 
+                    _defaultSerializerOptions),
                 Encoding.UTF8,
                 "application/json"
             )
@@ -68,10 +78,7 @@ public class ApiClient
         if (!string.IsNullOrWhiteSpace(outputString))
             output = JsonSerializer.Deserialize<TOutput>(
             outputString,
-            new JsonSerializerOptions
-            {
-                PropertyNameCaseInsensitive = true
-            }
+            _defaultSerializerOptions
         );
         return output;
     }
@@ -80,7 +87,9 @@ public class ApiClient
     {
         if (queryStringParameterObjects == null)
             return route;
-        var parameterJason = JsonSerializer.Serialize(queryStringParameterObjects);
+        var parameterJason = JsonSerializer.Serialize(
+            queryStringParameterObjects, 
+            _defaultSerializerOptions);
         var paremetersDictionary = Newtonsoft.Json.JsonConvert
             .DeserializeObject<Dictionary<string, string>>(parameterJason);
         return QueryHelpers.AddQueryString(route, paremetersDictionary!);

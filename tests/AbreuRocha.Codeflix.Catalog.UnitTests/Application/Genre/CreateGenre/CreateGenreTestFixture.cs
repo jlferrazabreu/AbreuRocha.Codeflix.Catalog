@@ -1,0 +1,50 @@
+﻿using AbreuRocha.Codeflix.Catalog.Application.Interfaces;
+using AbreuRocha.Codeflix.Catalog.Application.UseCases.Genre.CreateGenre;
+using AbreuRocha.Codeflix.Catalog.Domain.Repository;
+using AbreuRocha.Codeflix.Catalog.UnitTests.Application.Genre.Common;
+using Bogus.DataSets;
+using Moq;
+using Xunit;
+
+namespace AbreuRocha.Codeflix.Catalog.UnitTests.Application.Genre.CreateGenre;
+[CollectionDefinition(nameof(CreateGenreTestFixture))]
+public class CreateGenreTestFixtureCollection
+    : ICollectionFixture<CreateGenreTestFixture>
+{ }
+public class CreateGenreTestFixture 
+    : GenreUseCasesBaseFixture
+{
+    public CreateGenreInput GetExampleInput()
+        => new CreateGenreInput(
+            GetValidGenreName(),
+            GetRandomBoolean()
+         );
+
+    public CreateGenreInput GetExampleInput(string? name)
+        => new CreateGenreInput(
+            name!,
+            GetRandomBoolean()
+         );
+
+    public CreateGenreInput GetExampleInputWithCategories()
+    {
+        var numberOfCategoriesIds = (new Random().Next(1, 10));
+        var categoriesIds = Enumerable.Range(1, numberOfCategoriesIds)
+            .Select(_ => Guid.NewGuid())
+            .ToList();
+        return new CreateGenreInput(
+            GetValidGenreName(),
+            GetRandomBoolean(),
+            categoriesIds
+         );
+    }
+
+    public Mock<IGenreRepository> GetGenreRepositoryMock()
+        => new();
+
+    public Mock<IUnitOfWork> GetUnitOfWorkMock()
+        => new();
+
+    public Mock<ICategoryRepository> GetCategoryRepositoryMock()
+        => new();
+}

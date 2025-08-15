@@ -74,6 +74,7 @@ public class GenreTest
 
         genre.Activate();
 
+        genre.Id.Should().NotBeEmpty();
         (genre.IsActive).Should().BeTrue();
     }
 
@@ -87,6 +88,7 @@ public class GenreTest
 
         genre.Deactivate();
 
+        genre.Id.Should().NotBeEmpty();
         (genre.IsActive).Should().BeFalse();
     }
 
@@ -99,6 +101,7 @@ public class GenreTest
 
         genre.Update(newGenreName);
 
+        genre.Id.Should().NotBeEmpty();
         genre.Name.Should().Be(newGenreName);
     }
 

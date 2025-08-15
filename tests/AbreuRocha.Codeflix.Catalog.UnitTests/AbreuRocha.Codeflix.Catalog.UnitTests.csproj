@@ -29,4 +29,8 @@
     <ProjectReference Include="..\..\src\AbreuRocha.Codeflix.Catalog.Domain\AbreuRocha.Codeflix.Catalog.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Application\Genre\" />
+  </ItemGroup>
+
 </Project>

@@ -1,6 +1,6 @@
 ﻿using DomainEntity = AbreuRocha.Codeflix.Catalog.Domain.Entity;
 
-namespace AbreuRocha.Codeflix.Catalog.Application.UseCases.Common;
+namespace AbreuRocha.Codeflix.Catalog.Application.UseCases.Genre.Common;
 public class GenreModelOutput
 {
     public GenreModelOutput(

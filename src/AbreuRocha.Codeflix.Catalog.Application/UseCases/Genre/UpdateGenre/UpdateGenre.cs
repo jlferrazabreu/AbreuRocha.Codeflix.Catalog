@@ -1,21 +1,21 @@
 ﻿using AbreuRocha.Codeflix.Catalog.Application.Exceptions;
 using AbreuRocha.Codeflix.Catalog.Application.Interfaces;
 using AbreuRocha.Codeflix.Catalog.Application.UseCases.Genre.Common;
+using AbreuRocha.Codeflix.Catalog.Application.UseCases.Genre.CreateGenre;
 using AbreuRocha.Codeflix.Catalog.Domain.Repository;
-using DomainEntity = AbreuRocha.Codeflix.Catalog.Domain.Entity;
 
-namespace AbreuRocha.Codeflix.Catalog.Application.UseCases.Genre.CreateGenre;
+namespace AbreuRocha.Codeflix.Catalog.Application.UseCases.Genre.UpdateGenre;
 
-public class CreateGenre
-    : ICreateGenre
+public class UpdateGenre
+    : IUpdateGenre
 {
+    private readonly ICategoryRepository _categoryRepository;
     private readonly IGenreRepository _genreRepository;
     private readonly IUnitOfWork _unitOfWork;
-    private readonly ICategoryRepository _categoryRepository;
 
-    public CreateGenre(
+    public UpdateGenre(
         IGenreRepository genreRepository, 
-        IUnitOfWork unitOfWork,
+        IUnitOfWork unitOfWork, 
         ICategoryRepository categoryRepository)
     {
         _genreRepository = genreRepository;
@@ -24,26 +24,36 @@ public class CreateGenre
     }
 
     public async Task<GenreModelOutput> Handle(
-        CreateGenreInput request, 
+        UpdateGenreInput request,
         CancellationToken cancellationToken)
     {
-        var genre = new DomainEntity.Genre(
-            request.Name,
-            request.IsActive
-            );
-        if ((request.CategoriesIds?.Count ?? 0) > 0)
+        var genre = await _genreRepository.Get(
+            request.Id,
+            cancellationToken
+
+        );
+        genre.Update(request.Name);
+        if (request.IsActive is not null && request.IsActive != genre.IsActive)
         {
-            await ValidateCategoriesIds(request, cancellationToken);
-            request.CategoriesIds?.ForEach(
-                genre.AddCategory);
+            if ((bool)request.IsActive) genre.Activate();
+            else genre.Deactivate();
         }
-        await _genreRepository.Insert(genre, cancellationToken);
+        if(request.CategoriesIds is not null)
+        {
+            genre.RemoveAllCategories();
+            if (request.CategoriesIds.Count > 0)
+            {
+                await ValidateCategoriesIds(request, cancellationToken);
+                request.CategoriesIds?.ForEach(genre.AddCategory);
+            }
+        }
+        await _genreRepository.Update(genre, cancellationToken);
         await _unitOfWork.Commit(cancellationToken);
         return GenreModelOutput.FromGenre(genre);
     }
 
-    private async Task ValidateCategoriesIds (
-        CreateGenreInput request,
+    private async Task ValidateCategoriesIds(
+        UpdateGenreInput request,
         CancellationToken cancellationToken)
     {
         var IdsInPersistence = await _categoryRepository.GetIdsListByIds(

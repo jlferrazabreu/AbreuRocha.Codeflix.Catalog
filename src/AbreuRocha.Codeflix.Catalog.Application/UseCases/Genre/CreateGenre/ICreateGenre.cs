@@ -1,4 +1,4 @@
-﻿using AbreuRocha.Codeflix.Catalog.Application.UseCases.Common;
+﻿using AbreuRocha.Codeflix.Catalog.Application.UseCases.Genre.Common;
 using MediatR;
 
 namespace AbreuRocha.Codeflix.Catalog.Application.UseCases.Genre.CreateGenre;

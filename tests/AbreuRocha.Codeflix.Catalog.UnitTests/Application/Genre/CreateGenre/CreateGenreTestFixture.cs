@@ -1,9 +1,5 @@
-﻿using AbreuRocha.Codeflix.Catalog.Application.Interfaces;
-using AbreuRocha.Codeflix.Catalog.Application.UseCases.Genre.CreateGenre;
-using AbreuRocha.Codeflix.Catalog.Domain.Repository;
+﻿using AbreuRocha.Codeflix.Catalog.Application.UseCases.Genre.CreateGenre;
 using AbreuRocha.Codeflix.Catalog.UnitTests.Application.Genre.Common;
-using Bogus.DataSets;
-using Moq;
 using Xunit;
 
 namespace AbreuRocha.Codeflix.Catalog.UnitTests.Application.Genre.CreateGenre;
@@ -38,13 +34,4 @@ public class CreateGenreTestFixture
             categoriesIds
          );
     }
-
-    public Mock<IGenreRepository> GetGenreRepositoryMock()
-        => new();
-
-    public Mock<IUnitOfWork> GetUnitOfWorkMock()
-        => new();
-
-    public Mock<ICategoryRepository> GetCategoryRepositoryMock()
-        => new();
 }

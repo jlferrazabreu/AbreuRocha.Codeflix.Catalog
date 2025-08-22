@@ -45,6 +45,12 @@ public class UpdateGenreTest
         GenreModelOutput output = 
             await useCase.Handle(input, CancellationToken.None);
 
+        output.Should().NotBeNull();
+        output.Id.Should().Be(exampleGenre.Id);
+        output.Name.Should().Be(newNameExample);
+        output.IsActive.Should().Be(newIsActive);
+        output.CreatedAt.Should().BeSameDateAs(exampleGenre.CreatedAt);
+        output.Categories.Should().HaveCount(0);
         genreRepositoryMock.Verify(x => x.Update(
                 It.Is<DomainEntity.Genre>(x => x.Id == exampleGenre.Id),
                 It.IsAny<CancellationToken>()
@@ -53,13 +59,6 @@ public class UpdateGenreTest
         unitOfWorkMock.Verify(x => x.Commit(
             It.IsAny<CancellationToken>()
         ), Times.Once);
-
-        output.Should().NotBeNull();
-        output.Id.Should().Be(exampleGenre.Id);
-        output.Name.Should().Be(newNameExample);
-        output.IsActive.Should().Be(newIsActive);
-        output.CreatedAt.Should().BeSameDateAs(exampleGenre.CreatedAt);
-        output.Categories.Should().HaveCount(0);
     }
 
     [Fact(DisplayName = nameof(ThrowWhenNotFound))]
@@ -154,6 +153,12 @@ public class UpdateGenreTest
         GenreModelOutput output =
             await useCase.Handle(input, CancellationToken.None);
 
+        output.Should().NotBeNull();
+        output.Id.Should().Be(exampleGenre.Id);
+        output.Name.Should().Be(newNameExample);
+        output.IsActive.Should().Be(isActive);
+        output.CreatedAt.Should().BeSameDateAs(exampleGenre.CreatedAt);
+        output.Categories.Should().HaveCount(0);
         genreRepositoryMock.Verify(x => x.Update(
                 It.Is<DomainEntity.Genre>(x => x.Id == exampleGenre.Id),
                 It.IsAny<CancellationToken>()
@@ -162,13 +167,6 @@ public class UpdateGenreTest
         unitOfWorkMock.Verify(x => x.Commit(
             It.IsAny<CancellationToken>()
         ), Times.Once);
-
-        output.Should().NotBeNull();
-        output.Id.Should().Be(exampleGenre.Id);
-        output.Name.Should().Be(newNameExample);
-        output.IsActive.Should().Be(isActive);
-        output.CreatedAt.Should().BeSameDateAs(exampleGenre.CreatedAt);
-        output.Categories.Should().HaveCount(0);
     }
 
     [Fact(DisplayName = nameof(UpdateGenreAddingCategoriesIds))]
@@ -205,15 +203,6 @@ public class UpdateGenreTest
         GenreModelOutput output =
             await useCase.Handle(input, CancellationToken.None);
 
-        genreRepositoryMock.Verify(x => x.Update(
-                It.Is<DomainEntity.Genre>(x => x.Id == exampleGenre.Id),
-                It.IsAny<CancellationToken>()
-        ), Times.Once);
-
-        unitOfWorkMock.Verify(x => x.Commit(
-            It.IsAny<CancellationToken>()
-        ), Times.Once);
-
         output.Should().NotBeNull();
         output.Id.Should().Be(exampleGenre.Id);
         output.Name.Should().Be(newNameExample);
@@ -223,6 +212,14 @@ public class UpdateGenreTest
         exampleCategoriesIdsList.ForEach(
             expectedId => output.Categories.Should().Contain( expectedId ) 
         );
+        genreRepositoryMock.Verify(x => x.Update(
+                It.Is<DomainEntity.Genre>(x => x.Id == exampleGenre.Id),
+                It.IsAny<CancellationToken>()
+        ), Times.Once);
+
+        unitOfWorkMock.Verify(x => x.Commit(
+            It.IsAny<CancellationToken>()
+        ), Times.Once);
     }
 
     [Fact(DisplayName = nameof(UpdateGenreReplacingCategoriesIds))]
@@ -261,15 +258,6 @@ public class UpdateGenreTest
         GenreModelOutput output =
             await useCase.Handle(input, CancellationToken.None);
 
-        genreRepositoryMock.Verify(x => x.Update(
-                It.Is<DomainEntity.Genre>(x => x.Id == exampleGenre.Id),
-                It.IsAny<CancellationToken>()
-        ), Times.Once);
-
-        unitOfWorkMock.Verify(x => x.Commit(
-            It.IsAny<CancellationToken>()
-        ), Times.Once);
-
         output.Should().NotBeNull();
         output.Id.Should().Be(exampleGenre.Id);
         output.Name.Should().Be(newNameExample);
@@ -279,6 +267,14 @@ public class UpdateGenreTest
         exampleCategoriesIdsList.ForEach(
             expectedId => output.Categories.Should().Contain(expectedId)
         );
+        genreRepositoryMock.Verify(x => x.Update(
+                It.Is<DomainEntity.Genre>(x => x.Id == exampleGenre.Id),
+                It.IsAny<CancellationToken>()
+        ), Times.Once);
+
+        unitOfWorkMock.Verify(x => x.Commit(
+            It.IsAny<CancellationToken>()
+        ), Times.Once);
     }
 
     [Fact(DisplayName = nameof(ThrowWhenCategoryNotFound))]
@@ -361,15 +357,6 @@ public class UpdateGenreTest
         GenreModelOutput output =
             await useCase.Handle(input, CancellationToken.None);
 
-        genreRepositoryMock.Verify(x => x.Update(
-                It.Is<DomainEntity.Genre>(x => x.Id == exampleGenre.Id),
-                It.IsAny<CancellationToken>()
-        ), Times.Once);
-
-        unitOfWorkMock.Verify(x => x.Commit(
-            It.IsAny<CancellationToken>()
-        ), Times.Once);
-
         output.Should().NotBeNull();
         output.Id.Should().Be(exampleGenre.Id);
         output.Name.Should().Be(newNameExample);
@@ -379,6 +366,14 @@ public class UpdateGenreTest
         exampleCategoriesIdsList.ForEach(
             expectedId => output.Categories.Should().Contain(expectedId)
         );
+        genreRepositoryMock.Verify(x => x.Update(
+                It.Is<DomainEntity.Genre>(x => x.Id == exampleGenre.Id),
+                It.IsAny<CancellationToken>()
+        ), Times.Once);
+
+        unitOfWorkMock.Verify(x => x.Commit(
+            It.IsAny<CancellationToken>()
+        ), Times.Once);
     }
 
     [Fact(DisplayName = nameof(UpdateGenreWithEmptyCategoriesIds))]
@@ -414,6 +409,12 @@ public class UpdateGenreTest
         GenreModelOutput output =
             await useCase.Handle(input, CancellationToken.None);
 
+        output.Should().NotBeNull();
+        output.Id.Should().Be(exampleGenre.Id);
+        output.Name.Should().Be(newNameExample);
+        output.IsActive.Should().Be(newIsActive);
+        output.CreatedAt.Should().BeSameDateAs(exampleGenre.CreatedAt);
+        output.Categories.Should().HaveCount(0);
         genreRepositoryMock.Verify(x => x.Update(
                 It.Is<DomainEntity.Genre>(x => x.Id == exampleGenre.Id),
                 It.IsAny<CancellationToken>()
@@ -422,12 +423,5 @@ public class UpdateGenreTest
         unitOfWorkMock.Verify(x => x.Commit(
             It.IsAny<CancellationToken>()
         ), Times.Once);
-
-        output.Should().NotBeNull();
-        output.Id.Should().Be(exampleGenre.Id);
-        output.Name.Should().Be(newNameExample);
-        output.IsActive.Should().Be(newIsActive);
-        output.CreatedAt.Should().BeSameDateAs(exampleGenre.CreatedAt);
-        output.Categories.Should().HaveCount(0);
     }
 }
